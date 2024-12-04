@@ -1,15 +1,8 @@
-# KLTN
-Khóa Luận Tốt Nghiệp_Website đặt món bằng QR-Code
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
-
-### `npm install`
-
-To install all library
 
 In the project directory, you can run:
 

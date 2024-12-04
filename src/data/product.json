@@ -1,0 +1,39 @@
+[
+    {
+      "name": "Mì cay Hàn Quốc vị bò",
+      "cate": "Mì Cay",
+      "img": "miCay1.jpg",
+      "price": 3.50
+    },
+    {
+      "name": "Mì cay Thái vị tôm chua cay",
+      "cate": "Mì Cay",
+      "img": "miCay2.jpg",
+      "price": 3.75
+    },
+    {
+      "name": "Mì cay Nhật Bản vị gà Teriyaki",
+      "cate": "Mì Cay",
+      "img": "miCay3.jpg",
+      "price": 4.00
+    },
+    {
+      "name": "Mì cay Trung Quốc vị cay Tứ Xuyên",
+      "cate": "Mì Cay",
+      "img": "miCay4.jpg",
+      "price": 4.25
+    },
+    {
+      "name": "Mì cay Việt Nam vị sa tế",
+      "cate": "Mì Cay",
+      "img": "miCay5.jpg",
+      "price": 3.25
+    },
+    {
+      "name": "Mì cay Ý vị hải sản",
+      "cate": "Mì Cay",
+      "img": "miCay6.jpg",
+      "price": 4.50
+    }
+  ]
+  

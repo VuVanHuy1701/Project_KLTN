@@ -1,0 +1,39 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    border: 2px solid black;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+  }
+  
+  .navbar-links li {
+    border: 2px solid black;
+    padding: 5px 10px;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .search-bar {
+    flex-grow: 1;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-bar input {
+    width: 50%;
+    padding: 5px;
+    border: 2px solid black;
+  }
+  
