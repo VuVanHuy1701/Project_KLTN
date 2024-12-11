@@ -107,11 +107,17 @@ const Navbar = () => {
           <a href="/receipt">Đơn Hàng</a>
         </li>
         <li className={activeItem === 'dangnhap' ? 'active' : ''} onClick={() => handleItemClick('dangnhap')}>
-          <a href="/login">Đăng Nhập</a>
+          <a href="/checkout">Thanh Toán</a>
           {/*<NavLink to="/login" tag={Link}>
             Đăng Nhập
           </NavLink>*/}
         </li>
+        {/* <li className={activeItem === 'dangnhap' ? 'active' : ''} onClick={() => handleItemClick('dangnhap')}>
+          <a href="/login">Đăng Nhập</a>
+          {/*<NavLink to="/login" tag={Link}>
+            Đăng Nhập
+          </NavLink>}
+        </li> */}
       </ul>
     </nav>
   );

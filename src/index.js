@@ -13,6 +13,7 @@ import ContactIndex from './component/views/contact.view';
 
 import CartIndex from './component/views/cart.view';
 import ReceiptIndex from './component/views/receipt.view';
+import CheckoutIndex from './component/views/checkout.view';
 
 import AdminPage from './component/Admin/admin.component';
 import InsertPage from './component/Admin/addProduct.component';
@@ -41,6 +42,7 @@ root.render(
       <Route path="/cart" element={<CartIndex />} />
 
       <Route path="/receipt" element={<ReceiptIndex />} />
+      <Route path="/checkout" element={<CheckoutIndex />} />
 
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/insert" element={<InsertPage />} />
