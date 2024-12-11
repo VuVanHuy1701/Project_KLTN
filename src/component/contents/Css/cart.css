@@ -1,5 +1,4 @@
 
-
 .order-info-container {
   height: 100%;
   width: 100%;
@@ -86,6 +85,7 @@
   font-weight: bold;
 }
 .btn-send {
+
   width: 100%;
   justify-content: center;
   height: 50px;
@@ -93,4 +93,7 @@
   border-radius: 30px !important;
   background-color: rgba(186, 133, 83, 0.999) !important;
   
+}
+.btn-send a {
+  color: #ffffff !important;
 }

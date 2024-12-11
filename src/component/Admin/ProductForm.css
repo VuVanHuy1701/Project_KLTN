@@ -1,0 +1,51 @@
+.section-signup {
+    min-height: 700px;
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+  
+  .card-signup {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-signup .form {
+    width: 100%;
+  }
+  
+  .card-signup .form .row {
+    margin-bottom: 15px;
+  }
+  
+  .card-signup .form .row label {
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .card-signup .form input,
+  .card-signup .form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .card-signup .form input[type="file"] {
+    padding: 3px;
+  }
+  
+  .card-signup .btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .modal-body {
+    font-size: 16px;
+    text-align: center;
+  }
+  

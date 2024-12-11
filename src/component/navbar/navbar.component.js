@@ -97,14 +97,14 @@ const Navbar = () => {
       </ul>
       {/* Search bar */}
       <div className="search-bar">
-        <input type="text" placeholder="Thanh Tìm Kiếm" />
+        
       </div>
       <ul className="navbar-links">
         <li className={activeItem === 'giohang' ? 'active' : ''} onClick={() => handleItemClick('giohang')}>
           <a href="/cart">Giỏ Hàng</a>
         </li>
         <li className={activeItem === 'giohang' ? 'active' : ''} onClick={() => handleItemClick('giohang')}>
-          <a href="/login">Đơn Hàng</a>
+          <a href="/receipt">Đơn Hàng</a>
         </li>
         <li className={activeItem === 'dangnhap' ? 'active' : ''} onClick={() => handleItemClick('dangnhap')}>
           <a href="/login">Đăng Nhập</a>

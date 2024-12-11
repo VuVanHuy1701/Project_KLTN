@@ -4,6 +4,12 @@ const cors = require('cors');
 const app = express();
 const PORT = 5000;
 
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+const path = require('path');
+
 app.use(cors());
 // Middleware
 app.use(express.json());
@@ -23,8 +29,13 @@ app.use('/products', productRoutes);
 const cartRoute = require('./src/routes/cartRoutes');
 app.use('/carts', cartRoute);
 
+const orderRoute = require('./src/routes/orderRoutes');
+app.use('/orders', orderRoute);
+
+app.use("/uploads", express.static("uploads"));
+
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-

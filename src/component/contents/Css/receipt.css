@@ -1,0 +1,100 @@
+.receipt-container {
+    background-color: #f7fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 1rem; /* Ensure padding on small screens */
+  }
+  
+  .receipt-card {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 32rem; /* Adjust max-width for smaller screens */
+    margin: 0 1rem; /* Add margins to prevent overflow on smaller screens */
+  }
+  
+  .store-name {
+    font-weight: bold;
+    font-size: 1.5rem; /* Increased font size for readability */
+    line-height: 1.75rem;
+  }
+  
+  .store-info {
+    line-height: 1.75rem;
+    font-size: 1rem; /* Ensure store info text fits well */
+  }
+  
+  .font-bold {
+    font-weight: bold;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  .table {
+    width: 100%;
+    margin-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .table-header {
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .table-cell {
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 1rem; /* Ensure table cell text fits well */
+  }
+  
+  .table-row {
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .store-name {
+      font-size: 1.25rem; /* Slightly smaller font for medium screens */
+    }
+    .store-info {
+      font-size: 0.9rem; /* Adjust font size for smaller text */
+    }
+    .table-cell {
+      font-size: 0.9rem; /* Scale down table font size */
+    }
+    .receipt-card {
+      max-width: 90%; /* Allow card to take more width on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .store-name {
+      font-size: 1rem; /* Further reduce font size for very small screens */
+    }
+    .store-info {
+      font-size: 0.8rem; /* Adjust font size further */
+    }
+    .table-cell {
+      font-size: 0.8rem; /* Scale down table font size */
+    }
+    .receipt-card {
+      padding: 0.5rem; /* Less padding on smaller screens */
+    }
+  }
+  

@@ -63,6 +63,61 @@ const OrderInfo = () => {
     return new Intl.NumberFormat('de-DE').format(number);
   };
 
+  // const handlePlaceOrder = async () => {
+  //   try {
+  //     const orderItems = cartItems.map((item) => ({
+  //       name: item.productID.name,
+  //       quantity: item.quantity,
+  //       price: item.productID.price,
+  //       total: item.productID.price * item.quantity,
+  //     }));
+  //     const totalAmount = calculateTotal();
+  
+  //     const response = await axios.post('http://localhost:5000/orders', {
+  //       items: orderItems,
+  //       totalAmount,
+  //     });
+  
+  //     alert('Đơn hàng đã được gửi thành công!');
+  //     console.log('Order placed:', response.data); // Log thông tin đơn hàng
+  //     setCartItems([]); // Xóa giỏ hàng sau khi đặt hàng
+  //   } catch (error) {
+  //     console.error('Error placing order:', error.response?.data || error.message);
+  //     alert(`Gửi đơn hàng thất bại: ${error.response?.data?.message || error.message}`);
+  //   }
+  // };
+
+  const handlePlaceOrder = async () => {
+    try {
+      const orderItems = cartItems.map((item) => ({
+        name: item.productID.name,
+        quantity: item.quantity,
+        price: item.productID.price,
+        total: item.productID.price * item.quantity,
+        note: item.note || 'Không có ghi chú', // Include the note
+      }));
+      const totalAmount = calculateTotal();
+  
+      // Gửi yêu cầu tạo đơn hàng
+      const response = await axios.post('http://localhost:5000/orders', {
+        items: orderItems,
+        totalAmount,
+      });
+  
+      // Gửi yêu cầu xóa tất cả các sản phẩm trong giỏ hàng
+      await axios.delete('http://localhost:5000/carts/clear');
+  
+      alert('Đơn hàng đã được gửi thành công!');
+      setCartItems([]); // Xóa giỏ hàng trong giao diện
+    } catch (error) {
+      console.error('Error placing order:', error.response?.data || error.message);
+      alert(`Gửi đơn hàng thất bại: ${error.response?.data?.message || error.message}`);
+    }
+  };
+  
+  
+  
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -78,7 +133,7 @@ const OrderInfo = () => {
             <img 
               alt="Shopping item"
               className="item-img"  
-              src={item.productID.img ? require(`../assets/foodImg/${item.productID.img}`) : ''} />
+              src={item.productID.img ? require(`/uploads/${item.productID.img}`) : ''} />
             <div className="item-details">
               <h2 className="item-title">{item.productID.name}</h2>
               <p className="item-note">Ghi chú: {item.note || 'Không có ghi chú'}</p>
@@ -112,8 +167,10 @@ const OrderInfo = () => {
       </div>
 
       <div className="footer">
-        <button className="text-lg font-bold btn btn-send">Gửi Đơn</button>
-      </div>
+  <button onClick={handlePlaceOrder} className="text-lg font-bold btn btn-send">
+    Gửi Đơn
+  </button>
+</div>
 
       <div className="total-container">
         <p className="total-amount">

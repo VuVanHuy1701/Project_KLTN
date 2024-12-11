@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
 const CartItem = require('../models/CartItem');
-const Product = require('../models/Product');
+const Order = require('../models/Order');
 
 // Tạo giỏ hàng mới
 // 1. Sửa đổi tên trường `accID` thành `userID` trong CartItem và Cart
@@ -51,6 +51,31 @@ router.post('/cart', async (req, res) => {
         res.status(500).json({ error: 'An error occurred while adding the product to the cart.' });
     }
 });
+
+// Xóa toàn bộ giỏ hàng
+// Xóa toàn bộ giỏ hàng dựa trên cartID
+// router.delete('/:cartID', async (req, res) => {
+//     const { cartID } = req.params;
+//     try {
+//       await CartItem.deleteMany({ cartID }); // Xóa tất cả sản phẩm trong giỏ hàng
+//       res.status(200).json({ message: 'Cart cleared successfully.' });
+//     } catch (err) {
+//       res.status(500).json({ message: err.message });
+//     }
+//   });
+
+// Xóa tất cả các sản phẩm trong giỏ hàng mà không cần tham chiếu đến ID
+router.delete('/clear', async (req, res) => {
+    try {
+      await CartItem.deleteMany(); // Xóa tất cả các sản phẩm trong giỏ hàng
+      res.status(200).json({ message: 'All cart items cleared successfully.' });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+  
+  
+
 
 router.get('/:userID', async (req, res) => {
     const { userID } = req.params;

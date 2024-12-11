@@ -12,6 +12,10 @@ import HomeIndex from './component/views/home.view';
 import ContactIndex from './component/views/contact.view';
 
 import CartIndex from './component/views/cart.view';
+import ReceiptIndex from './component/views/receipt.view';
+
+import AdminPage from './component/Admin/admin.component';
+import InsertPage from './component/Admin/addProduct.component';
 
 // style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -35,6 +39,11 @@ root.render(
       <Route path="/contact" element={<ContactIndex />} />
 
       <Route path="/cart" element={<CartIndex />} />
+
+      <Route path="/receipt" element={<ReceiptIndex />} />
+
+      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/insert" element={<InsertPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
