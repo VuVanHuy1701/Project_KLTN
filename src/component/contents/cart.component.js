@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Css/cart.css';
 
 const OrderInfo = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Initialize navigate
 
   useEffect(() => {
     fetchCartItems();
@@ -141,6 +143,7 @@ const OrderInfo = () => {
     
       alert('Đơn hàng đã được gửi thành công!');
       setCartItems([]); // Clear cart items from the UI
+      navigate('/receipt'); 
     } catch (error) {
       console.error('Error placing order:', error.response?.data || error.message);
       alert(`Gửi đơn hàng thất bại: ${error.response?.data?.message || error.message}`);
@@ -200,7 +203,7 @@ const OrderInfo = () => {
 
       <div className="footer">
   <button onClick={handlePlaceOrder} className="text-lg font-bold btn btn-send">
-    <a href="/receipt">Gửi Đơn</a>
+    Gửi Đơn
   </button>
 </div>
 

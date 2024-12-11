@@ -95,4 +95,27 @@ router.patch('/orders/:id/status', async (req, res) => {
   }
 });
 
+// Get all orders
+router.get('/', async (req, res) => {
+  try {
+    const orders = await Orderuser.find(); // Fetch all orders from the database
+    res.json(orders);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ message: 'Server error while fetching orders' });
+  }
+});
+
+// Get orders by userId (optional for filtering by user ID)
+router.get('/user/:userId', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const orders = await Orderuser.find({ userId }); // Fetch orders by userId
+    res.json(orders);
+  } catch (error) {
+    console.error('Error fetching orders by userId:', error);
+    res.status(500).json({ message: 'Server error while fetching orders by userId' });
+  }
+});
+
 module.exports = router;
