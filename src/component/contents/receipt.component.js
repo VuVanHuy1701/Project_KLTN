@@ -1,33 +1,24 @@
 import React from "react";
-import './Css/receipt.css'; 
+import "./Css/receipt.css";
 
 const IndexReceipt = () => {
   return (
     <div className="receipt-container">
       <div className="receipt-card">
-        <div className="text-center">
-          <h1 className="store-name">CÀ PHÊ HOÀNG PHÚC</h1>
-          <p className="store-info">Đường Số 24 KDC An Khánh, P. An Khánh</p>
-          <p className="store-info">Q. Ninh Kiều - TP. Cần Thơ</p>
+        <div className="text-top">
+          <h1 className="store-name">TIỆM MÌ KAYYY</h1>
+          <p className="store-info">Đường Số 24 KDC An Khánh, P. An Khánh, TP.HCM</p>
           <p className="store-info">ĐT: 0974.300.007 - 0909.191.195</p>
         </div>
         <div className="text-center font-bold mt-4">
           <p>HÓA ĐƠN BÁN HÀNG</p>
           <p>Bàn 05</p>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between">
           <p>Ngày: 18/02/2019</p>
-          <p>Số: 021900003</p>
+          <p>Giờ: 01:41</p>
         </div>
-        <div className="flex justify-between">
-          <p>Thu ngân: Administrator</p>
-          <p>In lúc: 01:41</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Giờ vào: 01:41</p>
-          <p>Giờ ra: 01:41</p>
-        </div>
-        <div className="mt-4">
+        <div className="">
           <p>Ghi chú:</p>
         </div>
         <table className="table">

@@ -87,6 +87,35 @@ const OrderInfo = () => {
   //   }
   // };
 
+  //      Gửi đơn hàng và xóa dữ liệu trong giỏ hàng
+  // const handlePlaceOrder = async () => {
+  //   try {
+  //     const orderItems = cartItems.map((item) => ({
+  //       name: item.productID.name,
+  //       quantity: item.quantity,
+  //       price: item.productID.price,
+  //       total: item.productID.price * item.quantity,
+  //       note: item.note || 'Không có ghi chú', // Include the note
+  //     }));
+  //     const totalAmount = calculateTotal();
+  
+  //     // Gửi yêu cầu tạo đơn hàng
+  //     const response = await axios.post('http://localhost:5000/orders', {
+  //       items: orderItems,
+  //       totalAmount,
+  //     });
+  
+  //     // Gửi yêu cầu xóa tất cả các sản phẩm trong giỏ hàng
+  //     await axios.delete('http://localhost:5000/carts/clear');
+  
+  //     alert('Đơn hàng đã được gửi thành công!');
+  //     setCartItems([]); // Xóa giỏ hàng trong giao diện
+  //   } catch (error) {
+  //     console.error('Error placing order:', error.response?.data || error.message);
+  //     alert(Gửi đơn hàng thất bại: ${error.response?.data?.message || error.message});
+  //   }
+  // };
+  //    Gửi đơn hàng và xóa dữ liệu trong giỏ hàng, đồng thời gửi vào bảng orderuser
   const handlePlaceOrder = async () => {
     try {
       const orderItems = cartItems.map((item) => ({
@@ -98,17 +127,20 @@ const OrderInfo = () => {
       }));
       const totalAmount = calculateTotal();
   
-      // Gửi yêu cầu tạo đơn hàng
+      const userId = 'user123'; // This should come from authentication state, like from `user` or `localStorage`
+  
+      // Send request to create an order in both Order and Orderuser
       const response = await axios.post('http://localhost:5000/orders', {
         items: orderItems,
         totalAmount,
+        userId, // Include the userId in the request
       });
   
-      // Gửi yêu cầu xóa tất cả các sản phẩm trong giỏ hàng
+      // Clear the cart after placing the order
       await axios.delete('http://localhost:5000/carts/clear');
-  
+    
       alert('Đơn hàng đã được gửi thành công!');
-      setCartItems([]); // Xóa giỏ hàng trong giao diện
+      setCartItems([]); // Clear cart items from the UI
     } catch (error) {
       console.error('Error placing order:', error.response?.data || error.message);
       alert(`Gửi đơn hàng thất bại: ${error.response?.data?.message || error.message}`);
@@ -168,7 +200,7 @@ const OrderInfo = () => {
 
       <div className="footer">
   <button onClick={handlePlaceOrder} className="text-lg font-bold btn btn-send">
-    Gửi Đơn
+    <a href="/receipt">Gửi Đơn</a>
   </button>
 </div>
 
