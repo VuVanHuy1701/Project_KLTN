@@ -139,10 +139,9 @@ const OrderInfo = () => {
       });
   
       // Clear the cart after placing the order
-      await axios.delete('http://localhost:5000/carts/clear');
+      await axios.delete('http://localhost:5000/carts/clear'); 
     
       alert('Đơn hàng đã được gửi thành công!');
-      setCartItems([]); // Clear cart items from the UI
       navigate('/receipt'); 
     } catch (error) {
       console.error('Error placing order:', error.response?.data || error.message);

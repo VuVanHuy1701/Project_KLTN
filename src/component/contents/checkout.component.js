@@ -1,9 +1,11 @@
 // PaymentPage.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './Css/checkout.css';
 
 const PaymentPage = ({ userId }) => {
+  const navigate = useNavigate(); // Initialize navigate
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,14 +34,23 @@ const PaymentPage = ({ userId }) => {
 
   useEffect(() => {
     const total = orders.reduce((sum, order) => sum + order.items.reduce((itemSum, item) => itemSum + item.price * item.quantity, 0), 0);
-    if (promoCode === "MiKAY") {
+    if (promoCode === "MIKAY") {
       setDiscountedTotal(total * 0.9);
     } else {
       setDiscountedTotal(total);
     }
   }, [promoCode, orders]);
 
+  const [submitLoading, setSubmitLoading] = useState(false);
+
   const handleSubmit = async () => {
+    // Kiểm tra thông tin bắt buộc
+    if (!formData.fullName || !formData.phoneNumber || !formData.email || !formData.paymentMethod) {
+      alert("Vui lòng điền đầy đủ thông tin Họ tên, Số điện thoại, Email, và chọn Hình thức thanh toán.");
+      return;
+    }
+  
+    setSubmitLoading(true);
     try {
       const orderDetails = {
         userId,
@@ -53,17 +64,21 @@ const PaymentPage = ({ userId }) => {
         totalAmount: discountedTotal,
         paymentMethod: formData.paymentMethod,
       };
-
-      // Send the order to the backend
-      const response = await axios.post('http://localhost:5000/ordersuccess', orderDetails);
+  
+      const response = await axios.post('http://localhost:5000/ordersuccess/place-order', orderDetails);
       if (response.status === 200) {
         alert("Order placed successfully!");
+        setOrders([]); // Clear cart items from the UI([]); // Clear cart items from the UI
+        navigate('/product'); 
       }
     } catch (err) {
       console.error("Error placing order:", err);
       alert("Failed to place the order.");
+    } finally {
+      setSubmitLoading(false);
     }
   };
+  
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -154,7 +169,7 @@ const PaymentPage = ({ userId }) => {
             </tbody>
           </table>
           <div className="total">Tổng thành tiền: {total.toLocaleString()}</div>
-          {promoCode === "MIKAY" && <div className="discount">Giảm giá: -{(total * 0.1).toLocaleString()}</div>}
+          {promoCode === "MIKAY" && <div className="discount">Giảm giá: -{(total * 0.2).toLocaleString()}</div>}
           <div className="final-total">Tổng tiền sau giảm: {discountedTotal.toLocaleString()}</div>
           <div className="promo-code">
             <input 
@@ -167,8 +182,11 @@ const PaymentPage = ({ userId }) => {
         </div>
       </div>
       <div className="submit-btn">
-        <button onClick={handleSubmit}>Đặt hàng</button>
-      </div>
+  <button onClick={handleSubmit} disabled={submitLoading}>
+    {submitLoading ? "Đang xử lý..." : "Đặt hàng"}
+  </button>
+</div>
+
     </div>
   );
 };

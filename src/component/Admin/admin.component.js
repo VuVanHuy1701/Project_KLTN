@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import { Button, Container } from 'reactstrap';
-import "./admin.css";
+import "./Css/admin.css";
 
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +30,7 @@ const AdminPage = () => {
       setFilteredProducts(response.data); // Initially display all products
     } catch (error) {
       console.error('Error fetching products:', error);
-    }
+    } 
   };
 
   const handleRemoveItem = async (itemId) => {
@@ -57,9 +57,9 @@ const AdminPage = () => {
   return (
     <Container>
       <div className="sidebar">
-        <a className="active" href="#"><i className="fas fa-th-large"></i> Dashboard</a>
-        <a href="#"><i className="fas fa-box"></i> Products</a>
-        <a href="/Dh"><i className="fas fa-shopping-cart"></i> My Order</a>
+        <a className="active" href="#"><i className="fas fa-box"></i> Products</a>
+        <a href="#"><i className="fas fa-th-large"></i> Dashboard</a>
+        <a href="/Dh"><i className="fas fa-shopping-cart"></i>Order</a>
         <a href="#"><i className="fas fa-user"></i> User</a>
         <a href="#"><i className="fas fa-bell"></i> Notifications</a>
         <a href="/login-page"><i className="fas fa-sign-out-alt"></i> Logout</a>

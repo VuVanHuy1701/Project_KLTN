@@ -1,11 +1,4 @@
 /* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
-
 .sidebar {
   width: 200px;
   margin-left: -180px;
@@ -41,7 +34,6 @@ body {
   width: 1300px;
   margin-left: 20px;  /* Leave space for sidebar */
   padding: 20px;
-
   box-sizing: border-box;
 }
 
@@ -52,6 +44,7 @@ body {
   padding: 10px 20px;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
+
 }
 
 .header h1 {
@@ -81,6 +74,7 @@ body {
 .table-container-s {
   background-color: #ffffff;
   padding: 20px;
+
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-x: auto;  /* Add horizontal scrolling for small screens */
@@ -151,6 +145,7 @@ th, td {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+
 }
 
 .pagination .active {

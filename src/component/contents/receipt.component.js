@@ -86,7 +86,7 @@ const IndexReceipt = () => {
               <p>Cảm ơn Quý khách. Hẹn gặp lại!</p>
             </div>
             <button className="text-lg font-bold btn btn-send">
-    Thanh Toán
+    <a href = "/checkout">Thanh Toán</a>
   </button>
           </div>
         ))

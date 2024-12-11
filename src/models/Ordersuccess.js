@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const orderSuccessSchema = new mongoose.Schema({
-  userId: { type: String, required: true }, // The user ID
+  userId: { type: String, required: false  }, // The user ID
   fullName: { type: String, required: true }, // Full name of the user
   phoneNumber: { type: String, required: true }, // Phone number
   email: { type: String, required: true }, // Email address

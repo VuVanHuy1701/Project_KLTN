@@ -16,7 +16,7 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import "./ProductForm.css";
+import "./Css/ProductForm.css";
 
 function InsertPage() {
   const [modal, setModal] = useState(false);
