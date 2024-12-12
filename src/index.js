@@ -17,7 +17,7 @@ import CheckoutIndex from './component/views/checkout.view';
 
 import AdminPage from './component/Admin/admin.component';
 import InsertPage from './component/Admin/addProduct.component';
-
+import OrderPage from './component/Admin/order.component';
 // style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./component/assets/css/bootstrap.min.css";
@@ -46,6 +46,7 @@ root.render(
 
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/insert" element={<InsertPage />} />
+      <Route path="/order-admin" element={<OrderPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

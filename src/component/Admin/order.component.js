@@ -4,33 +4,58 @@ import { Link } from "react-router-dom";
 import { Button, Container } from 'reactstrap';
 import "./Css/admin.css";
 
+// Format currency for orders
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+};
+
 const AdminPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10); // Limit to 10 products per page
-  const [searchTerm, setSearchTerm] = useState(""); // State for the search input
+  const [productsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchOrderTerm, setSearchOrderTerm] = useState(""); // State for order search input
 
   useEffect(() => {
     fetchProducts();
+    fetchOrders(); // Fetch orders when the component is mounted
   }, []);
 
   useEffect(() => {
-    // Filter products whenever the search term changes
     const filtered = products.filter(product =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) // Match product name
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchTerm, products]); // Re-run filtering when products or search term change
+  }, [searchTerm, products]);
+
+  useEffect(() => {
+    const filtered = orders.filter(order =>
+      order.userId.toLowerCase().includes(searchOrderTerm.toLowerCase()) // Match userId in orders
+    );
+    setFilteredOrders(filtered);
+  }, [searchOrderTerm, orders]);
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:5000/products');
       setProducts(response.data);
-      setFilteredProducts(response.data); // Initially display all products
+      setFilteredProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
-    } 
+    }
+  };
+
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/orders');
+      setOrders(response.data);
+      setFilteredOrders(response.data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
   };
 
   const handleRemoveItem = async (itemId) => {
@@ -43,23 +68,19 @@ const AdminPage = () => {
     }
   };
 
-  // Get current products for the page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-  // Calculate total number of pages
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <Container>
       <div className="sidebar">
-        <a className="active" href="/admin"><i className="fas fa-box"></i> Products</a>
+        <a className="active" href="#"><i className="fas fa-box"></i> Products</a>
         <a href="#"><i className="fas fa-th-large"></i> Dashboard</a>
-        <a href="/order-admin"><i className="fas fa-shopping-cart"></i>Order</a>
+        <a href="/Dh"><i className="fas fa-shopping-cart"></i> Order</a>
         <a href="#"><i className="fas fa-user"></i> User</a>
         <a href="#"><i className="fas fa-bell"></i> Notifications</a>
         <a href="/login-page"><i className="fas fa-sign-out-alt"></i> Logout</a>
@@ -72,61 +93,55 @@ const AdminPage = () => {
               type="text"
               placeholder="Search products..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Update the search term
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <i className="fas fa-search"></i>
           </div>
         </div>
-        <div className="table-container-s">
-          <div className="table-header">
-            <h2>Quản lý sản phẩm</h2>
-            <p className='total'>Total Products: {filteredProducts.length}</p> {/* Display total filtered product count */}
-          </div>
-          <Button className="add-button" tag={Link} to="/insert">+ Add New Product</Button>
+
+        {/* Order Management Section */}
+        <div className="order-management">
+          <h2>Order Management</h2>
           <div className="table-container">
             <table>
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Image</th>
-                  <th>Count In Stock</th>
-                  <th>Action</th>
+                  <th>User ID</th>
+                  <th>Table</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Total Amount</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {currentProducts.map((product, index) => (
-                  <tr key={product._id}>
-                    <td>{indexOfFirstProduct + index + 1}</td>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td><img src={require(`/uploads/${product.img}`)} alt={product.name} style={{ width: "100px" }} /></td>
-                    <td>{product.countInStock}</td>
-                    <td>
-                      <Button color="warning">Edit</Button>
-                      <Button color="danger" onClick={() => handleRemoveItem(product._id)}>Delete</Button>
-                    </td>
+                {filteredOrders.length > 0 ? (
+                  filteredOrders.map((order, index) => (
+                    <tr key={order._id}>
+                      <td>{index + 1}</td>
+                      <td>{order.userId}</td>
+                      <td>{order.tableNumber}</td>
+                      <td>{new Date(order.orderDate).toLocaleDateString('vi-VN')}</td>
+                      <td>{new Date(order.orderDate).toLocaleTimeString('vi-VN')}</td>
+                      <td>{formatCurrency(order.totalAmount)}</td>
+                      <td>
+                        <Button color="info">View</Button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7">No orders found</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
-
-          {/* Pagination Controls */}
-          <div className="pagination">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <Button
-                key={index + 1}
-                onClick={() => paginate(index + 1)}
-                disabled={currentPage === index + 1}
-                className={currentPage === index + 1 ? 'active' : ''}
-              >
-                {index + 1}
-              </Button>
-            ))}
-          </div>
         </div>
+
+        {/* Product Management Section */}
+        
       </div>
     </Container>
   );
