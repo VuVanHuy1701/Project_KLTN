@@ -68,27 +68,32 @@ const Navbar = () => {
               <ul>
                 <li className={activeItem === 'tatca' ? 'active' : ''} onClick={() => handleItemClick('tatca')}>
                   <img src="path-to-image-1.jpg" alt="Tất cả" />
-                  <span>Tất cả</span>
+                  <a href="/"><span>Tất cả</span></a>
                 </li>
                 <li className={activeItem === 'taiban' ? 'active' : ''} onClick={() => handleItemClick('taiban')}>
                   <img src="path-to-image-2.jpg" alt="Tại Bàn" />
-                  <span>Tại Bàn</span>
+                  <a href="/"><span>Tại Bàn</span></a>
+                  
                 </li>
                 <li className={activeItem === 'mangve' ? 'active' : ''} onClick={() => handleItemClick('mangve')}>
                   <img src="path-to-image-3.jpg" alt="Mang Về" />
-                  <span>Mang Về</span>
+                  <a href="/"><span>Mang Về</span></a>
+                  
                 </li>
                 <li className={activeItem === 'monthem' ? 'active' : ''} onClick={() => handleItemClick('monthem')}>
                   <img src="path-to-image-4.jpg" alt="Món Thêm" />
-                  <span>Món Thêm</span>
+                  <a href="/"><span>Món Thêm</span></a>
+                  
                 </li>
                 <li className={activeItem === 'monanchoi' ? 'active' : ''} onClick={() => handleItemClick('monanchoi')}>
                   <img src="path-to-image-5.jpg" alt="Món Ăn Chơi" />
-                  <span>Món Ăn Chơi</span>
+                  <a href="/"><span>Món Ăn Chơi</span></a>
+              
                 </li>
                 <li className={activeItem === 'nuoc' ? 'active' : ''} onClick={() => handleItemClick('nuoc')}>
                   <img src="path-to-image-6.jpg" alt="Nước" />
-                  <span>Nước</span>
+                  <a href="/"><span>Nước</span></a>
+
                 </li>
               </ul>
             </div>

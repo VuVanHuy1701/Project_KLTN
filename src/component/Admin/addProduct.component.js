@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -15,10 +15,12 @@ import {
   Row,
   Col,
   Label,
-} from "reactstrap";
-import "./Css/ProductForm.css";
+} from 'reactstrap';
+import './Css/ProductForm.css';
 
 function InsertPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [formData, setFormData] = useState({
@@ -27,6 +29,19 @@ function InsertPage() {
     cate: "",
     img: null,
   });
+
+  const product = location.state ? location.state.product : null; // Get product data if available
+
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        name: product.name || "",
+        price: product.price || "",
+        cate: product.cate || "",
+        img: null, // Để trống vì file upload xử lý riêng
+      });
+    }
+  }, [product]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,19 +67,22 @@ function InsertPage() {
       formDataToSubmit.append("cate", formData.cate);
       formDataToSubmit.append("img", formData.img);
 
-      const response = await axios.post("http://localhost:5000/products", formDataToSubmit, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = product
+        ? await axios.put(`http://localhost:5000/products/product/update/${product._id}`, formDataToSubmit, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+        : await axios.post("http://localhost:5000/products", formDataToSubmit, {
+            headers: { "Content-Type": "multipart/form-data" },
+          });
 
-      setModalMessage("Product added successfully!");
+      setModalMessage(product ? "Product updated successfully!" : "Product added successfully!");
     } catch (error) {
-      setModalMessage("Failed to add product. Please try again.");
+      setModalMessage("Failed to add or update product. Please try again.");
     } finally {
       setModal(true);
     }
   };
-  
-const navigate = useNavigate(); // Initialize navigate
+
   const closeModal = () => {
     setModal(false);
     navigate("/admin"); // Redirect to admin page
@@ -77,7 +95,7 @@ const navigate = useNavigate(); // Initialize navigate
           <Card className="card-signup">
             <Form onSubmit={handleSubmit} className="form">
               <CardHeader className="text-center">
-                <h3>Add Product</h3>
+                <h3>{product ? "Edit Product" : "Add Product"}</h3>
               </CardHeader>
               <CardBody>
                 <Row>
@@ -119,23 +137,34 @@ const navigate = useNavigate(); // Initialize navigate
                       type="file"
                       name="img"
                       onChange={handleFileChange}
-                      required
                     />
+                    
                   </Col>
+                  
                 </Row>
+                
               </CardBody>
               <CardFooter className="text-center">
                 <Button color="info" type="submit">
-                  Submit
+                  {product ? "Update Product" : "Submit"}
                 </Button>
               </CardFooter>
             </Form>
           </Card>
         </Row>
+        {product && product.img && (
+                      <div className='img-edit'>
+                        <img
+                          src={`http://localhost:5000/uploads/${product.img}`}
+                          alt={product.name}
+                         
+                        />
+                      </div>
+                    )}
       </Container>
       <Modal toggle={closeModal} isOpen={modal}>
         <ModalBody>{modalMessage}</ModalBody>
-        <Button color="link" onClick={closeModal} > 
+        <Button color="link" onClick={closeModal}> 
           Close
         </Button>
       </Modal>

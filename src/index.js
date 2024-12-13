@@ -18,12 +18,14 @@ import CheckoutIndex from './component/views/checkout.view';
 import AdminPage from './component/Admin/admin.component';
 import InsertPage from './component/Admin/addProduct.component';
 import OrderPage from './component/Admin/order.component';
+import TablePage from './component/Admin/table.component';
+import OrderSuccessPage from './component/Admin/ordersuccess.component';
 // style
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "./component/assets/css/bootstrap.min.css";
+
+
 import "./component/assets/css/now-ui-kit.css";
-import "./component/assets/demo/demo.css";
-import "./component/assets/demo/nucleo-icons-page-styles.css";
+import "./component/assets/css/bootstrap.min.css";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -47,6 +49,8 @@ root.render(
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/insert" element={<InsertPage />} />
       <Route path="/order-admin" element={<OrderPage />} />
+      <Route path="/table" element={<TablePage />} />
+      <Route path="/order-success" element={<OrderSuccessPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

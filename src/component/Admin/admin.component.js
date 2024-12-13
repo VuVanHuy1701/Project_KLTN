@@ -57,9 +57,13 @@ const AdminPage = () => {
   return (
     <Container>
       <div className="sidebar">
+      <div >
+          <h1>Welcome back, Admin</h1>
+        </div>
         <a className="active" href="/admin"><i className="fas fa-box"></i> Products</a>
-        <a href="#"><i className="fas fa-th-large"></i> Dashboard</a>
+        <a href="/table"><i className=" active fas fa-th-large"></i> Table</a>
         <a href="/order-admin"><i className="fas fa-shopping-cart"></i>Order</a>
+        <a href="/order-success"><i className="fas fa-shopping-cart"></i>Order Success</a>
         <a href="#"><i className="fas fa-user"></i> User</a>
         <a href="#"><i className="fas fa-bell"></i> Notifications</a>
         <a href="/login-page"><i className="fas fa-sign-out-alt"></i> Logout</a>
@@ -104,7 +108,10 @@ const AdminPage = () => {
                     <td><img src={require(`/uploads/${product.img}`)} alt={product.name} style={{ width: "100px" }} /></td>
                     <td>{product.countInStock}</td>
                     <td>
-                      <Button color="warning">Edit</Button>
+                    <Button color="warning">
+                    <Link to="/insert" state={{ product }}>Edit</Link>
+</Button>
+
                       <Button color="danger" onClick={() => handleRemoveItem(product._id)}>Delete</Button>
                     </td>
                   </tr>

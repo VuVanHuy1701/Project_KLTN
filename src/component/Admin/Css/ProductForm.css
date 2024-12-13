@@ -1,7 +1,8 @@
 .section-signup {
-    min-height: 700px;
+    min-height: 800px;
     padding: 20px;
     background-color: #f7f7f7;
+    margin-top: -90px;
   }
   
   .card-signup {
@@ -48,4 +49,8 @@
     font-size: 16px;
     text-align: center;
   }
-  
+  .img-edit {
+    width: 47%;
+    margin: -10px 0px 0px 140px;
+    padding: 30px;
+  }

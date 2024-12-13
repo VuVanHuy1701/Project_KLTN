@@ -35,7 +35,7 @@ app.use('/orders', orderRoute);
 const ordersuccessRoute = require('./src/routes/ordersuccessRoutes');
 app.use('/ordersuccess', ordersuccessRoute);
 
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads")); 
 
 
 // Start the server

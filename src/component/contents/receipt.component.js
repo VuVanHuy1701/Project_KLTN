@@ -19,20 +19,22 @@ const IndexReceipt = () => {
   useEffect(() => {
     // Filter orders whenever the search term changes
     const filtered = orders.filter((order) =>
-      order.userId.toLowerCase().includes(searchTerm.toLowerCase()) // Match userId
+      order.userId?.toLowerCase().includes(searchTerm.toLowerCase()) // Check if userId exists
     );
     setFilteredOrders(filtered); // Update displayed orders
   }, [searchTerm, orders]); // Re-run filtering when search term or orders change
-
+  
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/orders'); // API URL to fetch orders
-      setOrders(response.data);
-      setFilteredOrders(response.data); // Initialize filtered orders
+      const response = await axios.get('http://localhost:5000/orders/user');
+      const validOrders = response.data.filter(order => order.userId); // Ensure userId exists
+      setOrders(validOrders);
+      setFilteredOrders(validOrders);
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
   };
+  
 
   return (
     <div className="receipt-container">

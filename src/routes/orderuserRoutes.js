@@ -37,4 +37,33 @@ router.post('/', async (req, res) => {
     console.error('Error placing order:', error.message);
     res.status(500).json({ message: 'Failed to place order', error: error.message });
   }
+
+  router.post('/orders/approve', async (req, res) => {
+    const orderData = req.body; // Order data sent from frontend
+    
+    try {
+      // Kiểm tra cấu trúc orderData
+      if (!orderData || !orderData.table || !orderData.items) {
+        return res.status(400).send("Dữ liệu đơn hàng không hợp lệ.");
+      }
+  
+      // Cập nhật đơn hàng trong Orderuser
+      const order = await Orderuser.findOneAndUpdate(
+        { table: orderData.table }, // Tìm đơn hàng theo bàn
+        { $set: { items: orderData.items, status: 'approved' } }, // Cập nhật trạng thái
+        { new: true }
+      );
+      
+      if (order) {
+        return res.status(200).send("Đơn hàng đã được duyệt thành công.");
+      } else {
+        return res.status(404).send("Đơn hàng không tìm thấy.");
+      }
+    } catch (error) {
+      console.error("Lỗi khi duyệt đơn hàng:", error);
+      return res.status(500).send("Có lỗi xảy ra khi duyệt đơn.");
+    }
+  });
+  
+  
 });

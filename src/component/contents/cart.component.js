@@ -11,7 +11,7 @@ const OrderInfo = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); // Initialize navigate
 
-  useEffect(() => {
+  useEffect(() => { 
     fetchCartItems();
   }, []);
 

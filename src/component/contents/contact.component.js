@@ -20,7 +20,7 @@ const IndexContact = () => {
                         <input type="email" id="email" name="email" required />
                         <label htmlFor="message">Message</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
-                        <button type="submit">Send Message</button>
+                        <button type="submit"><a href="/contact">Send Message</a></button>
                     </form>
                 </div>
                 <div className="map-container">

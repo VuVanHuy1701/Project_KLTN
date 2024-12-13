@@ -13,7 +13,7 @@ const IndexProduct = () => {
   const [searchTerm, setSearchTerm] = useState(''); // State for the search input
 
   useEffect(() => {
-    fetchProducts(); // Fetch products when the component is mounted
+    fetchProducts(); // Fetch product s when the component is mounted
   }, []);
 
   useEffect(() => {

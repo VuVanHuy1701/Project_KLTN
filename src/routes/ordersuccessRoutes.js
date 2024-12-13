@@ -34,4 +34,16 @@ router.post('/place-order', async (req, res) => {
   }
 });
 
+// Route to fetch all successful orders
+router.get('/', async (req, res) => {
+  try {
+    const orders = await Ordersuccess.find(); // Fetch all orders from the database
+    res.status(200).json(orders); // Send the orders as JSON response
+  } catch (err) {
+    console.error("Error fetching orders:", err.message);
+    res.status(500).send(`Failed to fetch orders: ${err.message}`);
+  }
+});
+
+
 module.exports = router;

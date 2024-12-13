@@ -1,0 +1,88 @@
+
+  .container-table {
+    display: flex;
+    position: absolute ;
+    justify-content: center;
+    padding: 30px;
+    margin-left:500px;
+  }
+  .sidebar-table {
+    margin-left: 190px;
+  }
+  .table {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .table:hover {
+    transform: scale(1.05);
+  }
+  
+  .modal {
+    justify-content: center !important;
+    align-items: center !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: block !important; /* Bỏ qua điều kiện hiển thị */
+    opacity: 1 !important;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 900px;
+    width: 90%;
+    height: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 100px 0px 0px 510px;
+  }
+  
+  .modal .close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    max-height: 800px; /* Set a max height for the grid */
+    width: 900px;
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding-right: 10px; /* Optional: prevent content from being cut off by scrollbar */
+  }
+  
+  .card {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
