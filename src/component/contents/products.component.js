@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Css/menu.css'; 
+import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
+import 'react-lazy-load-image-component/src/effects/blur.css'; // Optional: Blur effect for lazy images
+import './Css/menu.css';
 
-// Function to format numbers as currency
 const formatNumber = (number) => {
   return new Intl.NumberFormat('de-DE').format(number);
 };
 
 const IndexProduct = () => {
-  const [products, setProducts] = useState([]); // State to store all products
-  const [filteredProducts, setFilteredProducts] = useState([]); // State to store filtered products based on search term
-  const [searchTerm, setSearchTerm] = useState(''); // State for the search input
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchProducts(); // Fetch product s when the component is mounted
+    fetchProducts();
   }, []);
 
   useEffect(() => {
-    // Filter products whenever the search term changes
     const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) // Match product name
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredProducts(filtered); // Update the displayed products
-  }, [searchTerm, products]); // Re-run filtering when search term or products change
+    setFilteredProducts(filtered);
+  }, [searchTerm, products]);
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/products'); // API URL to fetch products
+      const response = await axios.get('http://localhost:5000/products');
       setProducts(response.data);
-      setFilteredProducts(response.data); // Initialize filtered products
+      setFilteredProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -36,38 +36,37 @@ const IndexProduct = () => {
 
   const truncateDescription = (description, maxLength) => {
     if (description.length > maxLength) {
-      return description.slice(0, maxLength) + "... read more"; // Truncate description if it's too long
+      return description.slice(0, maxLength) + "... read more";
     }
     return description;
   };
 
   return (
     <div className="menu">
-      {/* Search input at the top */}
       <div className="search-container">
         <input
           type="text"
           placeholder="Search for products..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)} // Update search term as user types
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      {/* Display filtered products */}
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product) => (
           <a href={`/detail/${product._id}`} className="menu-item" key={product._id}>
-            <img
+            <LazyLoadImage
               className="img-food"
               src={require(`/uploads/${product.img}`)}
               alt={truncateDescription(product.name, 20)}
+              effect="blur" // Add blur effect while loading
             />
             <div className="description">{truncateDescription(product.name, 30)}</div>
             <div className="price">{formatNumber(product.price)}</div>
           </a>
         ))
       ) : (
-        <p>No products found</p> // Display message when no products match the search term
+        <p>No products found</p>
       )}
     </div>
   );
